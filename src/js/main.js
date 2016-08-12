@@ -1,8 +1,9 @@
 let drivelist = require('drivelist');
-let glob = require('glob');
 var isWin = /^win/.test(process.platform);
 let separator = isWin ? '\\' : '/';
 let drivesNames = '';
+
+window.glob = require('glob');
 
 drivelist.list(function(error, disks){
     if(error){
@@ -12,48 +13,54 @@ drivelist.list(function(error, disks){
     drivesNames = disks.map((disk) => disk.name + separator);
 });
 
+// Split the autocomplet eval with chars \ / or < >
+function split( val ) {
+    return val.split( /[<>\\/]\s*/ );
+}
+
+function autocompleteeval (request, response){
+    let levels = split(request.term);
+    let data = [];
+    let current = levels.pop();
+
+    if(levels.length <= 0){
+        data = drivesNames;
+    } else {
+        
+        let root = levels[0];
+        let pattern = levels.slice(1).join('/') + '/' + '*/';
+
+        data = glob.sync(pattern, {root: root});
+    }
+
+    console.log(data);
+
+    response($.grep(data, (s) => s.startsWith(current)));
+}
+
+function autocompleteselect(event, ui){
+    let terms = split( this.value );
+
+    // remove the current input
+    terms.pop();
+    // add the selected item
+    terms.push( ui.item.value );
+    // add placeholder to get the comma-and-space at the end
+    // terms.push( "" );
+    this.value = terms.join(separator);
+    return false;
+}
+
 $(function() {
 
     let field = $(".autocomplete");
 
-    function split( val ) {
-        return val.split( /[<\\/]\s*/ );
-    }
-
     field.autocomplete({
         search: function () {},
-        source: function( request, response ) {
-            let levels = split(request.term);
-            let data = [];
-            let current = levels.pop();
-
-            if(levels.length <= 0){
-                data = drivesNames;
-            } else {
-                data = fs.readdirsync(levels.join(separator));
-            }
-
-            response($.ui.autocomplete.filter(
-                data,
-                current));
-        },
+        source: autocompleteeval,
         minLength: 0,
-        focus: function() {
-            return false;
-        },
-        select: function( event, ui ) {
-            let terms = split( this.value );
-
-            // remove the current input
-            terms.pop();
-            // add the selected item
-            terms.push( ui.item.value );
-            // add placeholder to get the comma-and-space at the end
-            // terms.push( "" );
-            this.value = terms.join(separator);
-            return false;
-        }
-
+        focus: function() { return false; },
+        select: autocompleteselect
     });
 
     field.focus();
