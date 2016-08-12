@@ -3,9 +3,25 @@
     <head>
         <meta charset="UTF-8">
         <title>Quick Dir</title>
-        <script src="./main.js" ></script>
+        <link href="./css/jquery-ui.css" rel="stylesheet"/>
+        <link href="./css/bootstrap.css" rel="stylesheet"/>
+
+        <!--<script src="./js/jquery.js"></script>-->
+        <script>
+            window.$ = window.jQuery = require('./js/jquery.js');
+            window.fs = require('fs');
+        </script>
+        <script src="./js/jquery-ui.js"></script>
+        <script src="./js/bootstrap.js"></script>
+        <script src="./js/main.js"></script>
+
     </head>
     <body>
-        Hello From Quick Dir
+        <!--<input type="text" 
+            id="txtDirNavigate" 
+            placeholder="Search directory here"
+            class="form-control"
+            />-->
+            <input class="form-control autocomplete" placeholder="Search directory here" />
     </body>
 </html>

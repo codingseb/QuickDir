@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach",
+            "name": "Attacher",
             "type": "node",
             "request": "attach",
             "port": 5858,
