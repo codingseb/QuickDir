@@ -16,18 +16,7 @@ function autocompleteeval (request, response){
 }
 
 function autocompleteselect(event, ui){
-    let terms = dirutils.split( this.value );
-
-    terms.pop();
-
-    if(terms.length > 0 ){
-        terms.push(dirutils.last(ui.item.value));
-    }
-    else {
-        terms.push(ui.item.value);
-    }
-
-    this.value = terms.join(dirutils.separator);
+    this.value = ui.item.value;
     return false;
 }
 
