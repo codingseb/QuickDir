@@ -1,9 +1,11 @@
 let autocompletion = require('./js/dir-autocomplete.js');
 let dirutils = require('./js/dir-utils.js');
-let shell = require('shelljs');
 let isWin = /^win/.test(process.platform);
-let runCmd = isWin ? 'explorer ' : 'open ';
+let openDirCommand = isWin ? 'explorer ' : 'open ';
+let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
 let field = null;
+let exec = require("child_process").exec;
+let remote = require('electron').remote;
 
 dirutils.init(function(){
     $(function() {
@@ -42,15 +44,18 @@ function onkeydown(e){
         field.autocomplete("close");
     }
     else if(e.which === 116){
-        showcurrentdirectory();
+        executeondir(openDirCommand);
+    }
+    else if(e.which === 117){
+        remote.getGlobal('executeondir')(cmdCommand);
     }
 }
 
-function showcurrentdirectory(){
+function executeondir(cmd){
     try{
-        let cmd = runCmd + '"' + field.val() + '"';
-        console.log(cmd);
-        shell.exec(cmd, function(code, stdout, stderr){
+        let cmdToRun = cmd + '"' + field.val() + '"';
+        console.log(cmdToRun);
+        exec(cmdToRun, function(code, stdout, stderr){
             console.log({code, stdout, stderr});
         });
     }
