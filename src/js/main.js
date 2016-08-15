@@ -18,6 +18,12 @@ function split( val ) {
     return val.split( /[<>\\/]\s*/ );
 }
 
+function last( val ){
+    let arr = split(val);
+    
+    return (val.endsWith('/'))  ? arr[arr.length - 2] : arr[arr.length -1];
+}
+
 function autocompleteeval (request, response){
     let levels = split(request.term);
     let data = [];
@@ -33,9 +39,10 @@ function autocompleteeval (request, response){
         data = glob.sync(pattern, {root: root});
     }
 
-    console.log(data);
+    let filteredData = $.grep(data, (s) => last(s.toLowerCase())
+        .startsWith(current.toLowerCase()));
 
-    response($.grep(data, (s) => s.startsWith(current)));
+    response(filteredData);
 }
 
 function autocompleteselect(event, ui){
@@ -46,7 +53,7 @@ function autocompleteselect(event, ui){
     // add the selected item
     terms.push( ui.item.value );
     // add placeholder to get the comma-and-space at the end
-    // terms.push( "" );
+
     this.value = terms.join(separator);
     return false;
 }
