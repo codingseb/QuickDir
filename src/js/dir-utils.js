@@ -26,13 +26,13 @@ function getSubDirs(levels, current){
     let root = levels.join('/');
     let pattern = '/' + current + '*/';
 
-    console.log({root: root, pattern: pattern});
+    // console.log({root: root, pattern: pattern});
 
     return glob.sync(pattern, {root: root, nocase: true});
 }
 
 function getDrivesNames(current){
-    return drivesNames;
+    return $.grep(drivesNames, dn => dn.toLowerCase().startsWith(current.toLowerCase()));
 }
 
 exports.split = split;
