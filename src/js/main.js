@@ -1,7 +1,6 @@
 let navigation = require('./js/dir-autocomplete.js');
 
 $(function() {
-
     let field = $(".autocomplete");
 
     // Set the auto-complete to the field
