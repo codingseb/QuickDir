@@ -3,13 +3,16 @@ let isWin = /^win/.test(process.platform);
 let separator = isWin ? '\\' : '/';
 let drivesNames = '';
 
-drivelist.list(function(error, disks){
-    if(error){
-        throw error;
-    }
+function init(callback){
+    drivelist.list(function(error, disks){
+        if(error){
+            throw error;
+        }
 
-    drivesNames = disks.map((disk) => disk.name + separator);
-});
+        drivesNames = disks.map((disk) => disk.name + separator);
+        callback();
+    });
+}
 
 // Split the autocomplete eval with chars \ / or < >
 function split( val ) {
@@ -26,15 +29,15 @@ function getSubDirs(levels, current){
     let root = levels.join('/');
     let pattern = '/' + current + '*/';
 
-    // console.log({root: root, pattern: pattern});
-
-    return glob.sync(pattern, {root: root, nocase: true});
+    return glob.sync(pattern, {root: root, nocase: true})
+        .map(path => split(path).join(separator));
 }
 
 function getDrivesNames(current){
     return $.grep(drivesNames, dn => dn.toLowerCase().startsWith(current.toLowerCase()));
 }
 
+exports.init = init;
 exports.split = split;
 exports.last = last;
 exports.getSubDirs = getSubDirs;

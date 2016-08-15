@@ -11,6 +11,7 @@ function autocompleteeval (request, response){
     else {
         data = dirutils.getSubDirs(levels, current);
     }
+    
     response(data);
 }
 
@@ -21,7 +22,6 @@ function autocompleteselect(event, ui){
 
     if(terms.length > 0 ){
         terms.push(dirutils.last(ui.item.value));
-        terms.push("");
     }
     else {
         terms.push(ui.item.value);
