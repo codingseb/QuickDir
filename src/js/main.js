@@ -15,7 +15,7 @@ drivelist.list(function(error, disks){
 
 // Split the autocomplet eval with chars \ / or < >
 function split( val ) {
-    return val.split( /[<>\\/]\s*/ );
+    return val.split( /[<>\\/]\s*/ ).filter(val);
 }
 
 function last( val ){
