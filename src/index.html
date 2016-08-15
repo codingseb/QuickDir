@@ -3,13 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>Quick Dir</title>
-        <link href="./css/jquery-ui.css" rel="stylesheet"/>
-        <link href="./css/bootstrap.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="./css/jquery-ui.css" />
+        <link rel="stylesheet" href="./css/bootstrap.css" />
+        <link rel="stylesheet" href="./css/custom.css"/>
 
         <!--<script src="./js/jquery.js"></script>-->
         <script>
             window.$ = window.jQuery = require('./js/jquery.js');
             window.fs = require('fs');
+            window.glob = require('glob');
         </script>
         <script src="./js/jquery-ui.js"></script>
         <script src="./js/bootstrap.js"></script>

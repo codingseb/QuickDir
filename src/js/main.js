@@ -3,8 +3,6 @@ var isWin = /^win/.test(process.platform);
 let separator = isWin ? '\\' : '/';
 let drivesNames = '';
 
-window.glob = require('glob');
-
 drivelist.list(function(error, disks){
     if(error){
         throw error;
@@ -13,15 +11,24 @@ drivelist.list(function(error, disks){
     drivesNames = disks.map((disk) => disk.name + separator);
 });
 
-// Split the autocomplet eval with chars \ / or < >
+// Split the autocomplete eval with chars \ / or < >
 function split( val ) {
-    return val.split( /[<>\\/]\s*/ ).filter(val);
+    return val.split( /[<>\\/]\s*/ );
 }
 
 function last( val ){
     let arr = split(val);
-    
+
     return (val.endsWith('/'))  ? arr[arr.length - 2] : arr[arr.length -1];
+}
+
+function getSubDirs(levels, current){
+    let root = levels.join('/');
+    let pattern = '/' + current + '*/';
+
+    console.log({root: root, pattern: pattern});
+
+    return glob.sync(pattern, {root: root, nocase: true});
 }
 
 function autocompleteeval (request, response){
@@ -31,28 +38,25 @@ function autocompleteeval (request, response){
 
     if(levels.length <= 0){
         data = drivesNames;
-    } else {
-        
-        let root = levels[0];
-        let pattern = levels.slice(1).join('/') + '/' + '*/';
-
-        data = glob.sync(pattern, {root: root});
     }
-
-    let filteredData = $.grep(data, (s) => last(s.toLowerCase())
-        .startsWith(current.toLowerCase()));
-
-    response(filteredData);
+    else {
+        data = getSubDirs(levels, current);
+    }
+    response(data);
 }
 
 function autocompleteselect(event, ui){
     let terms = split( this.value );
 
-    // remove the current input
     terms.pop();
-    // add the selected item
-    terms.push( ui.item.value );
-    // add placeholder to get the comma-and-space at the end
+
+    if(terms.length > 0 ){
+        terms.push(last(ui.item.value));
+        terms.push("");
+    }
+    else {
+        terms.push(ui.item.value);
+    }
 
     this.value = terms.join(separator);
     return false;
@@ -62,13 +66,21 @@ $(function() {
 
     let field = $(".autocomplete");
 
+    // Set the auto-complete to the field
     field.autocomplete({
-        search: function () {},
         source: autocompleteeval,
         minLength: 0,
         focus: function() { return false; },
         select: autocompleteselect
     });
 
+    // Clear field on Escape key
+    field.keydown(function (e) {
+        if(e.which === 27){
+            field.val('');
+        }
+    });
+
+    // Focus the field as soon as the app is on
     field.focus();
 });
