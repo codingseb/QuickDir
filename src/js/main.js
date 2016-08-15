@@ -1,14 +1,14 @@
-let navigation = require('./js/dir-autocomplete.js');
+let autocompletion = require('./js/dir-autocomplete.js');
 
 $(function() {
     let field = $(".autocomplete");
 
     // Set the auto-complete to the field
     field.autocomplete({
-        source: navigation.autocompleteeval,
+        source: autocompletion.autocompleteeval,
         minLength: 0,
         focus: function() { return false; },
-        select: navigation.autocompleteselect
+        select: autocompletion.autocompleteselect
     });
 
     // Clear field on Escape key
