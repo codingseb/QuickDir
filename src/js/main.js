@@ -5,6 +5,7 @@ let openDirCommand = isWin ? 'explorer ' : 'open ';
 let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
 let field = null;
 let childProcess = require("child_process");
+const remote = require('electron').remote;
 
 dirutils.init(function(){
     $(function() {
@@ -27,9 +28,7 @@ dirutils.init(function(){
         .focus(function(){
             $(this).autocomplete("search", this.value);
             return false;
-        });
-
-        field.blur(function(){
+        }).blur(function(){
             field.focus();
             return false;
         });
@@ -44,8 +43,7 @@ dirutils.init(function(){
 
 function onkeydown(e){
     if(e.which === 27){
-        field.val('');
-        field.autocomplete("close");
+        clearOrClose();
     }
     else if(e.which === 116){
         showDir();
@@ -53,6 +51,20 @@ function onkeydown(e){
     else if(e.which === 117){
         cmdOnDir();
     }
+}
+
+function clearOrClose(){
+    if(field.val() === ''){
+        remote.getCurrentWindow().close();
+    }
+    else{
+        clearField();
+    }
+}
+
+function clearField(){
+    field.val('');
+    field.autocomplete("close");
 }
 
 function showDir(){
