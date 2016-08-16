@@ -5,7 +5,11 @@ var gulp         = require('gulp');
 
 
 gulp.task('run', function () {
-    childProcess.spawn(electron, ['--debug=5858', '.'],
+    childProcess.spawn(electron, ['.'],
     { stdio: 'inherit' });
 });
 
+gulp.task('debug', function () {
+    childProcess.spawn(electron, ['--debug=5858', '.'],
+    { stdio: 'inherit' });
+});

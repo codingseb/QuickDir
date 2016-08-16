@@ -9,7 +9,7 @@
     ],
     "tasks": [
         {
-            "taskName": "run", 
+            "taskName": "debug", 
             "args": [], 
             "isBuildCommand": true 
         }
