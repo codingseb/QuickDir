@@ -8,7 +8,7 @@ let childProcess = require("child_process");
 
 dirutils.init(function(){
     $(function() {
-        let body = $("body");
+
         field = $(".autocomplete");
 
         // Set the auto-complete to the field
@@ -26,6 +26,11 @@ dirutils.init(function(){
         })
         .focus(function(){
             $(this).autocomplete("search", "");
+            return false;
+        });
+
+        field.blur(function(){
+            field.focus();
             return false;
         });
 
