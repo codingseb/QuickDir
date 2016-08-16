@@ -25,7 +25,7 @@ dirutils.init(function(){
             select: autocompletion.autocompleteselect
         })
         .focus(function(){
-            $(this).autocomplete("search", "");
+            $(this).autocomplete("search", this.value);
             return false;
         });
 
