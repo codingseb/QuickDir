@@ -39,7 +39,7 @@ dirutils.init(function(){
             return false;
         });
 
-        // Clear field on Escape key
+
         field.keydown(onkeydown);
 
         // Focus the field as soon as the app is on
