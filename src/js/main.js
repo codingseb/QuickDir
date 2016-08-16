@@ -15,6 +15,14 @@ dirutils.init(function(){
             source: autocompletion.autocompleteeval,
             minLength: 0,
             delay: 0,
+            open: function(event, ui){
+                let autocompleteselect = $('#ui-id-1');
+                let offset = autocompleteselect.offset();
+                let bottom = offset.top + autocompleteselect.outerHeight();
+                let win = remote.getCurrentWindow();
+
+                win.setSize(win.getSize()[0], bottom);
+            },
             close: function(event, ui) {
                 try{
                     $(this).autocomplete("search", this.value);
