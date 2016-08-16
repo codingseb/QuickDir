@@ -63,7 +63,7 @@ function showDir(){
 
 function cmdOnDir(){
     try{
-        childProcess.spawn('', {
+        childProcess.spawn('cmd', {
             cwd: field.val(),
             detached: true,
             shell: true
