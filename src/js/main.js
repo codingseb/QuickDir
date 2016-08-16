@@ -4,7 +4,6 @@ let openDirCommand = isWin ? 'explorer ' : 'open ';
 let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
 let field = null;
 let childProcess = require("child_process");
-const remote = require('electron').remote;
 
 dirutils.init(function(){
     $(function() {
