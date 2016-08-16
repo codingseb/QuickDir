@@ -4,8 +4,7 @@ let isWin = /^win/.test(process.platform);
 let openDirCommand = isWin ? 'explorer ' : 'open ';
 let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
 let field = null;
-let exec = require("child_process").exec;
-let remote = require('electron').remote;
+let childProcess = require("child_process");
 
 dirutils.init(function(){
     $(function() {
@@ -44,20 +43,35 @@ function onkeydown(e){
         field.autocomplete("close");
     }
     else if(e.which === 116){
-        executeondir(openDirCommand);
+        showDir();
     }
     else if(e.which === 117){
-        remote.getGlobal('executeondir')(cmdCommand);
+        cmdOnDir();
     }
 }
 
-function executeondir(cmd){
+function showDir(){
     try{
-        let cmdToRun = cmd + '"' + field.val() + '"';
+        let cmdToRun = openDirCommand + '"' + field.val() + '"';
         console.log(cmdToRun);
-        exec(cmdToRun, function(code, stdout, stderr){
-            console.log({code, stdout, stderr});
+        childProcess.exec(cmdToRun, function(error, stdout, stderr){ });
+    }
+    catch(ex) {
+        console.log(ex);
+    }
+}
+
+function cmdOnDir(){
+    try{
+        childProcess.spawn('', {
+            cwd: field.val(),
+            detached: true,
+            shell: true
         });
     }
-    catch(ex) {}
+    catch(ex) {
+        console.log(ex);
+    }
 }
+
+
