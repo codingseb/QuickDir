@@ -12,6 +12,8 @@ function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({width: 800, height: 400});
 
+    win.setMenu(null);
+
     // and load the index.html of the app.
     win.loadURL(`file://${__dirname}/../src/index.html`);
 
