@@ -3,22 +3,10 @@ const electron = require('electron');
 const {app} = electron;
 // Module to create native browser window.
 const {BrowserWindow} = electron;
-let exec = require("child_process").exec;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
-
-global.executeondir = function (cmd){
-    try{
-        let cmdToRun = cmd + '"' + field.val() + '"';
-        console.log(cmdToRun);
-        exec(cmdToRun, function(code, stdout, stderr){
-            console.log({code, stdout, stderr});
-        });
-    }
-    catch(ex) {}
-};
 
 function createWindow() {
     // Create the browser window.
