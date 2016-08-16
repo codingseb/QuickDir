@@ -10,7 +10,18 @@ let win;
 
 function createWindow() {
     // Create the browser window.
-    win = new BrowserWindow({width: 800, height: 400});
+    win = new BrowserWindow({
+        width: 800,
+        height: 400,
+        x: 0,
+        y: 0,
+        transparent: true,
+        frame: false,
+        toolbar: false,
+        useContentSize: true,
+        maximizable: false,
+        minimizable: false
+    });
 
     win.setMenu(null);
 
