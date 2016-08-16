@@ -1,6 +1,5 @@
 let autocompletion = require('./js/dir-autocomplete.js');
 let dirutils = require('./js/dir-utils.js');
-let isWin = /^win/.test(process.platform);
 let openDirCommand = isWin ? 'explorer ' : 'open ';
 let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
 let field = null;

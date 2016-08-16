@@ -1,7 +1,7 @@
 let drivelist = require('drivelist');
-let isWin = /^win/.test(process.platform);
 let separator = isWin ? '\\' : '/';
 let drivesNames = '';
+const splitRegexp =  /[\\/]\s*/;
 
 function init(callback){
     drivelist.list(function(error, disks){
@@ -16,7 +16,7 @@ function init(callback){
 
 // Split the autocomplete eval with chars \ / or < >
 function split( val ) {
-    return val.split( /[<>\\/]\s*/ );
+    return val.split(splitRegexp);
 }
 
 function last( val ){
