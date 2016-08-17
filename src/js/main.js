@@ -2,13 +2,12 @@ let autocompletion = require('./js/dir-autocomplete.js');
 let dirutils = require('./js/dir-utils.js');
 let openDirCommand = isWin ? 'explorer ' : 'open ';
 let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
-let field = null;
 let childProcess = require("child_process");
 
 dirutils.init(function(){
     $(function() {
 
-        field = $(".autocomplete");
+        window.field = $(".autocomplete");
 
         // Set the auto-complete to the field
         field.autocomplete({
