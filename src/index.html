@@ -14,7 +14,8 @@
             window.glob = require('glob');
             window.isWin = /^win/.test(process.platform);
             window.remote = require('electron').remote;
-            window.config = require('electron-config')();
+            window.Config = require('electron-config');
+            window.favorites = new Config('favorites');
         </script>
         <script src="./js/jquery-ui.js"></script>
         <script src="./js/bootstrap.js"></script>
