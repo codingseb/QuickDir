@@ -3,6 +3,7 @@ let dirutils = require('./js/dir-utils.js');
 let openDirCommand = isWin ? 'explorer ' : 'open ';
 let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
 let childProcess = require("child_process");
+let autocompleteActions = require('./js/autocomplete-actions.js')
 
 dirutils.init(function(){
     $(function() {
@@ -15,20 +16,8 @@ dirutils.init(function(){
             source: autocompletion.autocompleteeval,
             minLength: 0,
             delay: 0,
-            open: function(event, ui){
-                let autocompleteselect = $('#ui-id-1');
-                let offset = autocompleteselect.offset();
-                let bottom = offset.top + autocompleteselect.outerHeight();
-                let win = remote.getCurrentWindow();
-
-                win.setSize(win.getSize()[0], bottom);
-            },
-            close: function(event, ui) {
-                try{
-                    $(this).autocomplete("search", this.value);
-                }
-                catch(e){}
-            },
+            open: autocompleteActions.onOpen,
+            close: autocompleteActions.onClose,
             select: autocompletion.autocompleteselect
         })
         .focus(function(){
@@ -37,9 +26,7 @@ dirutils.init(function(){
         }).blur(function(){
             field.focus();
             return false;
-        });
-
-        field.keydown(onkeydown);
+        }).keydown(onkeydown);
 
         // Focus the field as soon as the app is on
         field.focus();
