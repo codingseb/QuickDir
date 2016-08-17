@@ -31,6 +31,7 @@
   "dependencies": {
     "drivelist": "^3.2.6",
     "electron": "^1.3.3",
+    "electron-config": "^0.2.1",
     "glob": "^7.0.5",
     "shelljs": "^0.7.3"
   }
