@@ -6,7 +6,8 @@ let childProcess = require("child_process");
 
 dirutils.init(function(){
     $(function() {
-
+        
+        // Set field globaly
         window.field = $(".autocomplete");
 
         // Set the auto-complete to the field
@@ -46,12 +47,15 @@ dirutils.init(function(){
 });
 
 function onkeydown(e){
+    // On Escape
     if(e.which === 27){
         clearOrClose();
     }
+    // On F5
     else if(e.which === 116){
         showDir();
     }
+    // On F6
     else if(e.which === 117){
         cmdOnDir();
     }
