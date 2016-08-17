@@ -3,7 +3,7 @@ let dirutils = require('./js/dir-utils.js');
 let openDirCommand = isWin ? 'explorer ' : 'open ';
 let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
 let childProcess = require("child_process");
-let autocompleteActions = require('./js/autocomplete-actions.js')
+let autocompleteActions = require('./js/autocomplete-actions.js');
 
 dirutils.init(function(){
     $(function() {
