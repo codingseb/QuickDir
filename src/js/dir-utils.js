@@ -2,6 +2,7 @@ let drivelist = require('drivelist');
 let separator = isWin ? '\\' : '/';
 let drivesNames = '';
 const splitRegexp =  /[\\/]\s*/;
+const noMultiStarRegExp = /[*][*]+/;
 
 function init(callback){
     drivelist.list(function(error, disks){
@@ -27,7 +28,7 @@ function last( val ){
 
 function getSubDirs(levels, current){
     let root = levels.join('/');
-    let pattern = '/' + current + '*/';
+    let pattern = '/' + current + '*/'.replace(noMultiStarRegExp, '*');
 
     return glob.sync(pattern, {root: root, nocase: true})
         .map(path => split(path).join(separator));
