@@ -23,7 +23,7 @@ function createWindow() {
         minimizable: false
     });
 
-    win.setMenu(null);
+    // win.setMenu(null);
 
     // and load the index.html of the app.
     win.loadURL(`file://${__dirname}/../src/index.html`);
