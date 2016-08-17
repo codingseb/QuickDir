@@ -4,6 +4,7 @@ let openDirCommand = isWin ? 'explorer ' : 'open ';
 let cmdCommand = isWin ? "cmd /K cd /d "  : "terminal ";
 let childProcess = require("child_process");
 let autocompleteActions = require('./js/autocomplete-actions.js');
+let onDirActions = require('./js/on-dir-actions.js');
 
 dirutils.init(function(){
     $(function() {
@@ -40,11 +41,11 @@ function onkeydown(e){
     }
     // On F5
     else if(e.which === 116){
-        showDir();
+        onDirActions.showDir();
     }
     // On F6
     else if(e.which === 117){
-        cmdOnDir();
+        onDirActions.cmdOnDir();
     }
 }
 
@@ -60,28 +61,4 @@ function clearOrClose(){
 function clearField(){
     field.val('');
     field.autocomplete("close");
-}
-
-function showDir(){
-    try{
-        let cmdToRun = openDirCommand + '"' + field.val() + '"';
-        console.log(cmdToRun);
-        childProcess.exec(cmdToRun, function(error, stdout, stderr){ });
-    }
-    catch(ex) {
-        console.log(ex);
-    }
-}
-
-function cmdOnDir(){
-    try{
-        childProcess.spawn('cmd', {
-            cwd: field.val(),
-            detached: true,
-            shell: true
-        });
-    }
-    catch(ex) {
-        console.log(ex);
-    }
 }
