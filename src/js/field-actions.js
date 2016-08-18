@@ -3,7 +3,7 @@ let onDirActions = require('./on-dir-actions.js');
 exports.onkeydown = function (e){
     // On Escape
     if(e.which === 27){
-        clearOrClose();
+        clearOrMin();
     }
     // On Enter
     else if(e.which === 13){
@@ -19,9 +19,9 @@ exports.onkeydown = function (e){
     }
 };
 
-function clearOrClose(){
+function clearOrMin(){
     if(field.val() === ''){
-        remote.getCurrentWindow().close();
+        remote.getCurrentWindow().minimize();
     }
     else{
         clearField();
