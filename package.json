@@ -5,7 +5,16 @@
   "main": "electron/electron-app.js",
   "scripts": {
     "start": "electron .",
-    "clean:nm": "rimraf node_modules"
+
+    "clean:nm": "rimraf node_modules",
+    "clean:re": "rimraf release",
+    "clean:di": "rimraf dist",
+
+    "clean": "npm run clean:di && npm run clean:re",
+
+    "package": "electron-packager . \"Quick Dir\" --platform=all --arch=all --out=release",
+
+    "buildAll": "npm run clean && npm run package"
   },
   "repository": {
     "type": "git",
