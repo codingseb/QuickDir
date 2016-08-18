@@ -14,7 +14,9 @@
 
     "package": "electron-packager . \"Quick Dir\" --platform=all --arch=all --out=release",
 
-    "buildAll": "npm run clean && npm run package"
+    "build": "",
+
+    "release": "npm run clean && npm run package"
   },
   "repository": {
     "type": "git",
