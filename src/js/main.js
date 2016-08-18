@@ -7,7 +7,6 @@ let fieldActions = require('./js/field-actions.js');
 let onDirActions = require('./js/on-dir-actions.js');
 let autocompleteActions = require('./js/autocomplete-actions.js');
 
-
 dirutils.init(function(){
     $(function() {
         
