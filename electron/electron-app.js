@@ -6,10 +6,25 @@ const electron = require('electron');
 const {app} = electron;
 // Module to create native browser window.
 const {BrowserWindow} = electron;
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+
+// Ensure that only one instance of Quick Dir is running.
+const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (win) {
+        if (win.isMinimized()){
+            win.restore();
+        }
+        win.focus();
+    }
+});
+
+// Quit this instance if already one instance is running
+if (shouldQuit) {
+    app.quit();
+}
 
 function createWindow() {
     // Create the browser window.
