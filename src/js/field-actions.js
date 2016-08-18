@@ -34,13 +34,25 @@ function clearField(){
 }
 
 function checkAddFav(){
-    let favArray = field.val().split('=');
+    let fieldVal = field.val();
+    let favEqArray = fieldVal.split('=');
+    let favGtArray = fieldVal.split('>');
 
-    if(favArray.length === 2
-        && fs.existsSync(favArray[1])
-        && favArray[0] !== ''){
-        favorites.set(favArray[0], favArray[1]);
-        field.val(favArray[0]);
-        field.autocomplete('search', field.val());
+    console.log({fieldVal, favEqArray, favGtArray});
+    if(favEqArray.length === 2
+    && fs.existsSync(favEqArray[1])
+    && favEqArray[0] !== ''){
+        setFav(favEqArray[0], favEqArray[1]);
     }
+    else if(favGtArray.length === 2
+    && fs.existsSync(favGtArray[0])
+    && favGtArray[1] !== ''){
+        setFav(favGtArray[1], favGtArray[0]);
+    }
+}
+
+function setFav(fav, path){
+    favorites.set(fav, path);
+    field.val(fav);
+    field.autocomplete('search', field.val());
 }
