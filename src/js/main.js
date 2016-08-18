@@ -33,5 +33,7 @@ dirutils.init(function(){
 
         // Focus the field as soon as the app is on
         field.focus();
+
+        remote.require('./../src/js/init-time').initTimeMeasure();
     });
 });

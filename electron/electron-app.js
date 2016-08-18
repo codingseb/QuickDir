@@ -1,3 +1,6 @@
+// For mesuring loading performences
+console.time('init');
+
 const electron = require('electron');
 // Module to control application life.
 const {app} = electron;
