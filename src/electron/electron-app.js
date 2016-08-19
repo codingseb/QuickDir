@@ -44,7 +44,7 @@ function createWindow() {
     // win.setMenu(null);
 
     // and load the index.html of the app.
-    win.loadURL(`file://${__dirname}/../src/index.html`);
+    win.loadURL(`file://${__dirname}/../ui/index.html`);
 
     // Open the DevTools.
     //win.webContents.openDevTools();
