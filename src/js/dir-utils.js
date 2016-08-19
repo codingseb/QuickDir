@@ -11,7 +11,26 @@ function init(callback){
         }
 
         drivesNames = disks.map((disk) => disk.name + separator);
+        setTimeout(checkDriveListChanges, 5000);
         callback();
+    });
+}
+
+function checkDriveListChanges(){
+    drivelist.list((error, disks) => {
+        if(error){
+            throw error;
+        }
+
+        currentdrivesNames = disks.map((disk) => disk.name + separator);
+
+        if(JSON.stringify(drivesNames) !== JSON.stringify(currentdrivesNames)){
+            console.log({event: 'Drives changed', currentdrivesNames, drivesNames});
+            drivesNames = currentdrivesNames;
+            field.autocomplete('search', field.val());
+        }
+
+        setTimeout(checkDriveListChanges, 5000);
     });
 }
 
