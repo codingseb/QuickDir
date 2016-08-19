@@ -6,6 +6,7 @@ var cssmin = require('gulp-cssmin');
 var htmlmin = require('gulp-htmlmin');
 var jsmin = require('gulp-jsmin');
 var jsonTransform = require('gulp-json-transform');
+var install = require("gulp-install");
 
 gulp.task('run', function () {
     childProcess.spawn(electron, ['.'],
@@ -53,10 +54,16 @@ gulp.task('package_json', function(){
                 name: data.name,
                 version: data.version,
                 description: data.description,
-                main: "electron/electron-app.js"
+                main: "electron/electron-app.js",
+                dependencies: data.dependencies
             };
         }))
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task('install_dependencies', ['package_json'], function(){
+    gulp.src('dist/package.json')
+        .pipe(install());
 });
 
 gulp.task('default',
@@ -66,6 +73,7 @@ gulp.task('default',
         'jsmin',
         'fonts',
         'build-electron',
-        'package_json'
+        'package_json',
+        'install_dependencies'
     ]);
 
