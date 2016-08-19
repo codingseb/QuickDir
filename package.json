@@ -11,7 +11,7 @@
     "clean": "npm run clean:di && npm run clean:re",
     "package": "electron-packager ./dist \"Quick Dir\" --platform=all --arch=all --out=release",
     "build": "gulp",
-    "release": "npm run build && npm run clean && npm run package"
+    "release": "npm run clean && npm run build && npm run package"
   },
   "repository": {
     "type": "git",
