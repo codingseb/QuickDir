@@ -73,7 +73,6 @@ gulp.task('default',
         'jsmin',
         'fonts',
         'build-electron',
-        'package_json',
         'install_dependencies'
     ]);
 
