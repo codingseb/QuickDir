@@ -65,6 +65,7 @@ gulp.task('default',
         'htmlmin',
         'jsmin',
         'fonts',
-        'build-electron'
+        'build-electron',
+        'package_json'
     ]);
 
