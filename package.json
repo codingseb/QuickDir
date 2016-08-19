@@ -1,6 +1,6 @@
 {
   "name": "quickdir",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Allow to quickly navigate in the OS directories with the keyboard. (For Keyboard Geeks)",
   "main": "src/electron/electron-app.js",
   "scripts": {
