@@ -9,7 +9,7 @@ exports.onOpen = function(event, ui){
 
 exports.onClose = function(event, ui) {
     try{
-        $(this).autocomplete("search", this.value);
+        field.refresh();
     }
     catch(e){}
 };

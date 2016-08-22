@@ -7,7 +7,7 @@ exports.onkeydown = function (e){
     }
     // On Enter
     else if(e.which === 13){
-        checkAddFav();
+        validate(e);
     }
     // On F5
     else if(e.which === 116){
@@ -33,7 +33,7 @@ function clearField(){
     field.autocomplete("close");
 }
 
-function checkAddFav(){
+function validate(e){
     let fieldVal = field.val();
     let favEqArray = fieldVal.split('=');
     let favGtArray = fieldVal.split('>');
@@ -49,10 +49,20 @@ function checkAddFav(){
     && favGtArray[1] !== ''){
         setFav(favGtArray[1], favGtArray[0]);
     }
+    else if(favorites.has(field.val())){
+        field.val(favorites.get(field.val()));
+        field.refresh();
+    }
+    else if(e.ctrlKey){
+        onDirActions.showDir();
+    }
+    else if(e.altKey){
+        onDirActions.cmdOnDir();
+    }
 }
 
 function setFav(fav, path){
     favorites.set(fav, path);
     field.val(fav);
-    field.autocomplete('search', field.val());
+    field.refresh();
 }

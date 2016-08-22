@@ -27,7 +27,7 @@ function checkDriveListChanges(){
         if(JSON.stringify(drivesNames) !== JSON.stringify(currentdrivesNames)){
             console.log({event: 'Drives changed', currentdrivesNames, drivesNames});
             drivesNames = currentdrivesNames;
-            field.autocomplete('search', field.val());
+            field.refresh();
         }
 
         setTimeout(checkDriveListChanges, 5000);

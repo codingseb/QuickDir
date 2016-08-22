@@ -13,6 +13,10 @@ dirutils.init(function(){
         // Set field globaly
         window.field = $(".autocomplete");
 
+        field.refresh = function(){
+            field.autocomplete('search', field.val());
+        };
+
         // Set the auto-complete to the field
         field.autocomplete({
             source: autocompletion.autocompleteeval,
@@ -23,7 +27,7 @@ dirutils.init(function(){
             select: autocompletion.autocompleteselect
         })
         .focus(function(){
-            $(this).autocomplete("search", this.value);
+            field.refresh();
             return false;
         }).blur(function(){
             field.focus();
