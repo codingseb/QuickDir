@@ -54,4 +54,4 @@ On Mac OS: `Cmd+Shift+B`
 `npm run release`
 
 ## License
-The MIT license (See [LICENSE.md](LICENSE.md))
+The MIT license (See [LICENCE.md](LICENCE.md))
