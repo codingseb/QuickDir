@@ -40,12 +40,12 @@ function validate(e){
 
     console.log({fieldVal, favEqArray, favGtArray});
     if(favEqArray.length === 2
-    && fs.existsSync(favEqArray[1])
+    && ioExists(favEqArray[1])
     && favEqArray[0] !== ''){
         setFav(favEqArray[0], favEqArray[1]);
     }
     else if(favGtArray.length === 2
-    && fs.existsSync(favGtArray[0])
+    && ioExists(favGtArray[0])
     && favGtArray[1] !== ''){
         setFav(favGtArray[1], favGtArray[0]);
     }

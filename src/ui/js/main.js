@@ -7,6 +7,20 @@ let fieldActions = require('./js/field-actions.js');
 let onDirActions = require('./js/on-dir-actions.js');
 let autocompleteActions = require('./js/autocomplete-actions.js');
 
+// Add a method to know if a file or a directory exists
+window.ioExists = function(path){
+    let result = false;
+
+    try{
+        fs.accessSync(path, fs.F_OK);
+        result = true;
+    }
+    catch(e){
+    }
+
+    return result;
+};
+
 dirutils.init(function(){
     $(function() {
         
