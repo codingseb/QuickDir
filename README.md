@@ -26,8 +26,8 @@ Press Enter to validate. Now When you type the name of the shortcut the autocomp
 ### Hotkeys
 
 You can use the following hotkeys :
-* F5 : Show the current directory in explorer
-* F6 : Open a console (cmd) on the current directory
+* F5 or Ctrl+Enter : Show the current directory in explorer
+* F6 or Alt+Enter : Open a console (cmd) on the current directory
 * Escape : Clear the field or if it is already cleared, minimize the application.
 
 ## How to launch Quick Dir
