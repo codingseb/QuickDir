@@ -2,6 +2,7 @@ let drivelist = require('drivelist');
 let separator = isWin ? '\\' : '/';
 let drivesNames = '';
 const splitRegexp =  /[\\/]\s*/;
+const noMultiStarRegExp = /[*][*]+/;
 
 function init(callback){
     drivelist.list(function(error, disks){
@@ -10,7 +11,26 @@ function init(callback){
         }
 
         drivesNames = disks.map((disk) => disk.name + separator);
+        setTimeout(checkDriveListChanges, 5000);
         callback();
+    });
+}
+
+function checkDriveListChanges(){
+    drivelist.list((error, disks) => {
+        if(error){
+            throw error;
+        }
+
+        currentdrivesNames = disks.map((disk) => disk.name + separator);
+
+        if(JSON.stringify(drivesNames) !== JSON.stringify(currentdrivesNames)){
+            console.log({event: 'Drives changed', currentdrivesNames, drivesNames});
+            drivesNames = currentdrivesNames;
+            field.refresh();
+        }
+
+        setTimeout(checkDriveListChanges, 5000);
     });
 }
 
@@ -27,7 +47,7 @@ function last( val ){
 
 function getSubDirs(levels, current){
     let root = levels.join('/');
-    let pattern = '/' + current + '*/';
+    let pattern = '/' + current + '*/'.replace(noMultiStarRegExp, '*');
 
     return glob.sync(pattern, {root: root, nocase: true})
         .map(path => split(path).join(separator));

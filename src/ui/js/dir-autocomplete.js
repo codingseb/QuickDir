@@ -11,6 +11,11 @@ function autocompleteeval (request, response){
     else {
         data = dirutils.getSubDirs(levels, current);
     }
+
+    // Manage favorites
+    if(favorites.has(request.term)){
+        data.unshift(favorites.get(request.term));
+    }
     
     response(data);
 }

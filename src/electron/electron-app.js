@@ -1,12 +1,30 @@
+// For mesuring loading performences
+console.time('init');
+
 const electron = require('electron');
 // Module to control application life.
 const {app} = electron;
 // Module to create native browser window.
 const {BrowserWindow} = electron;
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+
+// Ensure that only one instance of Quick Dir is running.
+const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (win) {
+        if (win.isMinimized()){
+            win.restore();
+        }
+        win.focus();
+    }
+});
+
+// Quit this instance if already one instance is running
+if (shouldQuit) {
+    app.quit();
+}
 
 function createWindow() {
     // Create the browser window.
@@ -23,10 +41,10 @@ function createWindow() {
         minimizable: false
     });
 
-    win.setMenu(null);
+    // win.setMenu(null);
 
     // and load the index.html of the app.
-    win.loadURL(`file://${__dirname}/../src/index.html`);
+    win.loadURL(`file://${__dirname}/../ui/index.html`);
 
     // Open the DevTools.
     //win.webContents.openDevTools();
