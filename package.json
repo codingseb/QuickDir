@@ -1,6 +1,6 @@
 {
   "name": "quickdir",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Allow to quickly navigate in the OS directories with the keyboard. (For Keyboard Geeks)",
   "main": "src/electron/electron-app.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "clean:re": "rimraf release",
     "clean:di": "rimraf dist",
     "clean": "npm run clean:di && npm run clean:re",
-    "package": "electron-packager ./dist \"Quick Dir\" --platform=all --arch=all --out=release",
+    "package": "electron-packager ./dist \"Quick Dir\" --platform=win32 --arch=all --icon=icons/quickdir.ico --out=release",
     "build": "gulp",
     "release": "npm run clean && npm run build && cd dist && npm i && cd .. && npm run package"
   },
