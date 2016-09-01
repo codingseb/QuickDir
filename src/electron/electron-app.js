@@ -4,11 +4,14 @@ console.time('init');
 const electron = require('electron');
 // Module to control application life.
 const {app} = electron;
+app.setAppUserModelId("Quick Dir");
 // Module to create native browser window.
 const {BrowserWindow} = electron;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+
+
 
 // Ensure that only one instance of Quick Dir is running.
 const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
