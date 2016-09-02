@@ -30,6 +30,7 @@ if (shouldQuit) {
 }
 
 function createWindow() {
+    app.setAppUserModelId('com.electron.QuickDir');
     // Create the browser window.
     win = new BrowserWindow({
         width: 800,

@@ -9,7 +9,7 @@
     "clean:re": "rimraf release",
     "clean:di": "rimraf dist",
     "clean": "npm run clean:di && npm run clean:re",
-    "package": "electron-packager ./dist \"Quick Dir\" --platform=win32 --arch=all --icon=icons/quickdir.ico --out=release --overwrite --app-bundle-id=\"Quick Dir\" --helper-bundle-id=\"Quick Dir\" --version-string.ProductName=\"Quick Dir\" --version-string.FileDescription=\"Quick Dir\" --version-string.OriginalFilename=\"Quick Dir\" --version-string.InternalName=\"Quick Dir\" --version-string.CompanyName=\"Coding Seb\" --version-string.LegalCopyright=\"Copyright (C) 2016 Coding Seb Inc. All rights reserved.\" --app-version=\"1.2.1\" --version-string.ProductVersion=\"1.2.1\" ",
+    "package": "electron-packager ./dist \"Quick Dir\" --platform=win32 --arch=all --icon=icons/quickdir.ico --out=release --overwrite --app-bundle-id=com.electron.QuickDir --helper-bundle-id=com.electron.QuickDir --version-string.ProductName=\"Quick Dir\" --version-string.FileDescription=\"Quick Dir\" --version-string.OriginalFilename=\"Quick Dir\" --version-string.InternalName=\"Quick Dir\" --version-string.CompanyName=\"Coding Seb\" --version-string.LegalCopyright=\"Copyright (C) 2016 Coding Seb Inc. All rights reserved.\" --app-version=\"1.2.1\" --version-string.ProductVersion=\"1.2.1\"  --set-file-version=\"1.2.3\" --asar=true ",
     "build": "gulp",
     "release": "npm run clean && npm run build && cd dist && npm i && cd .. && npm run package"
   },
@@ -31,8 +31,8 @@
   },
   "homepage": "https://github.com/codingseb/QuickDir#readme",
   "devDependencies": {
-    "electron-packager": "^7.6.0",
-    "electron-prebuilt": "^1.3.3",
+    "electron-packager": "^7.7.0",
+    "electron-prebuilt": "^1.3.4",
     "gulp": "^3.9.1",
     "gulp-cssmin": "^0.1.7",
     "gulp-htmlmin": "^2.0.0",
